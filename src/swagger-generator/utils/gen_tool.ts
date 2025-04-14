@@ -2,7 +2,7 @@
  * @Author: zdd
  * @Date: 2023-06-05 11:28:07
  * @LastEditors: zdd jimmyzhao163@163.com
- * @LastEditTime: 2025-04-14 14:13:28
+ * @LastEditTime: 2025-04-14 16:34:12
  * @FilePath: gen_tool.ts
  * @Description:
  */
@@ -48,13 +48,13 @@ type RequestScript = {
   getPagingReturnContent?: (subType: string, suffix: string | boolean) => string;
 };
 
-function cloneWithDepth<T>(value: T, maxDepth: number, currentDepth = 0) {
-  return cloneDeepWith(value, (val, key, obj, stack) => {
-    if (currentDepth >= maxDepth) return val; // 达到深度限制时直接返回值，停止递归克隆
+// function cloneWithDepth<T>(value: T, maxDepth: number, currentDepth = 0): any {
+//   return cloneDeepWith<T>(value, (val, key, obj, stack) => {
+//     if (currentDepth >= maxDepth) return val; // 达到深度限制时直接返回值，停止递归克隆
 
-    if (typeof val === 'object' && val !== null) return cloneWithDepth(val, maxDepth, currentDepth + 1); // 递归递增深度计数器
-  });
-}
+//     if (typeof val === 'object' && val !== null) return cloneWithDepth<T>(val, maxDepth, currentDepth + 1); // 递归递增深度计数器
+//   });
+// }
 
 class SwaggerGenTool {
   private static _instance: SwaggerGenTool;
