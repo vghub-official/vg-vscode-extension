@@ -2,7 +2,7 @@
  * @Author: zdd
  * @Date: 2023-06-05 11:28:07
  * @LastEditors: zdd jimmyzhao163@163.com
- * @LastEditTime: 2025-04-08 15:47:11
+ * @LastEditTime: 2025-04-14 14:13:28
  * @FilePath: gen_tool.ts
  * @Description:
  */
@@ -22,7 +22,7 @@ import {
   writeFileSync,
 } from '@root/utils';
 import { baiduTranslationHandle, zhiyiTranslationHandle } from '../translation';
-import { cloneDeep, find, last, snakeCase } from 'lodash';
+import { cloneDeep, cloneDeepWith, find, last, snakeCase } from 'lodash';
 import { getModelName } from './common';
 import { JSONSchema, Method, Swagger, SwaggerHttpEndpoint } from '../index.d';
 import { DartPlatformImplementor, PlatformImplementor, TsPlatformImplementor } from '../generate';
@@ -47,6 +47,14 @@ type CommonScript = {
 type RequestScript = {
   getPagingReturnContent?: (subType: string, suffix: string | boolean) => string;
 };
+
+function cloneWithDepth<T>(value: T, maxDepth: number, currentDepth = 0) {
+  return cloneDeepWith(value, (val, key, obj, stack) => {
+    if (currentDepth >= maxDepth) return val; // 达到深度限制时直接返回值，停止递归克隆
+
+    if (typeof val === 'object' && val !== null) return cloneWithDepth(val, maxDepth, currentDepth + 1); // 递归递增深度计数器
+  });
+}
 
 class SwaggerGenTool {
   private static _instance: SwaggerGenTool;
@@ -143,7 +151,7 @@ class SwaggerGenTool {
 
   static get dataModels() {
     if (!this._dataModels) throw Error('please set dataModel');
-    return this._dataModels;
+    return cloneDeep(this._dataModels);
   }
 
   static getRealObject = (response?: JSONSchema) => {
