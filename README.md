@@ -1,5 +1,7 @@
 # VG：项目代码生成工具
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/vg-code-hub/vg-vscode-extension)
+
 你需要一个工具来自动生成规范的目录结构和常用页面文件。同时，还需要能够自动生成路由文件，将图片从 3.0x 转换为 1x 和 2x，以及将 Swagger 转换为请求和模型格式。这些任务需要自动化完成，你是否已经在寻找现有的工具或库来帮助你完成这些任务呢？
 
 [下载: vg-vscode-extension](https://marketplace.visualstudio.com/items?itemName=jimmyzhao.vg-vscode-extension) - marketplace
@@ -35,6 +37,52 @@
   - [x] 4. 可视化配置
 
 ---
+
+## 系统架构概述
+
+```mermaid
+flowchart TD
+    subgraph User Interface
+        A["VS Code Commands"]
+    end
+
+    subgraph Core Systems
+        D["Extension Activation"]
+    end
+
+    subgraph Code Generation
+        G["SwaggerGenTool"]
+        H["GetX Page Generators"]
+        I["Asset Generators"]
+        J["Schema2Code"]
+    end
+
+    A --> B["Web Views"]
+    A --> C["Context Menu Items"]
+    A --> F["Command Handlers"]
+    D --> F
+    D --> E["VGConfig"]
+    B --> F
+    F --> G
+    F --> H
+    F --> I
+    F --> J
+    F --> E
+
+    %% Connections with labels
+    D -. "Message Passing" .-> F
+```
+
+## 代码生成流程
+
+```mermaid
+flowchart LR
+    A["User Command<br>(e.g. swagger-gen)"] --> B["Command Handler<br>(src/commands)"]
+    B --> C["Configuration<br>(VGConfig)"]
+    C --> D["Generator<br>(SwaggerGenTool, etc.)"]
+    D --> E["Platform Implementation<br>(DartPlatformImplementor, TsPlatformImplementor)"]
+    E --> F["Output Files<br>(Models, Requests, etc.)"]
+```
 
 # 使用说明
 

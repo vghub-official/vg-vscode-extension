@@ -2,7 +2,7 @@
  * @Author: zdd
  * @Date: 2023-06-05 11:28:07
  * @LastEditors: zdd jimmyzhao163@163.com
- * @LastEditTime: 2025-04-14 16:34:12
+ * @LastEditTime: 2025-05-27 17:11:16
  * @FilePath: gen_tool.ts
  * @Description:
  */
@@ -22,7 +22,7 @@ import {
   writeFileSync,
 } from '@root/utils';
 import { baiduTranslationHandle, zhiyiTranslationHandle } from '../translation';
-import { cloneDeep, cloneDeepWith, find, last, snakeCase } from 'lodash';
+import { cloneDeep, find, last, snakeCase } from 'lodash';
 import { getModelName } from './common';
 import { JSONSchema, Method, Swagger, SwaggerHttpEndpoint } from '../index.d';
 import { DartPlatformImplementor, PlatformImplementor, TsPlatformImplementor } from '../generate';
@@ -47,14 +47,6 @@ type CommonScript = {
 type RequestScript = {
   getPagingReturnContent?: (subType: string, suffix: string | boolean) => string;
 };
-
-// function cloneWithDepth<T>(value: T, maxDepth: number, currentDepth = 0): any {
-//   return cloneDeepWith<T>(value, (val, key, obj, stack) => {
-//     if (currentDepth >= maxDepth) return val; // 达到深度限制时直接返回值，停止递归克隆
-
-//     if (typeof val === 'object' && val !== null) return cloneWithDepth<T>(val, maxDepth, currentDepth + 1); // 递归递增深度计数器
-//   });
-// }
 
 class SwaggerGenTool {
   private static _instance: SwaggerGenTool;
@@ -151,20 +143,21 @@ class SwaggerGenTool {
 
   static get dataModels() {
     if (!this._dataModels) throw Error('please set dataModel');
-    return cloneDeep(this._dataModels);
+    return this._dataModels;
+    // return cloneDeep(this._dataModels);
   }
 
   static getRealObject = (response?: JSONSchema) => {
     const dataModels = SwaggerGenTool.dataModels;
     if (typeof response !== 'object') return undefined;
     if (response.allOf) {
-      let rootObj = response.allOf[0];
+      let rootObj = { ...response.allOf[0] };
       for (let index = 0; index < response.allOf.length; index++) {
         const element = response.allOf[index];
         if (index === 0 && rootObj.$ref) {
           const parts = rootObj.$ref.split('/');
           const typeName = getModelName(parts[parts.length - 1]);
-          rootObj = dataModels[typeName];
+          rootObj = { ...dataModels[typeName] };
         } else if (element.properties) {
           rootObj.properties = Object.assign({}, rootObj.properties, element.properties);
         }
@@ -173,7 +166,7 @@ class SwaggerGenTool {
     } else if (response.$ref) {
       const parts = response.$ref.split('/');
       const typeName = getModelName(parts[parts.length - 1]);
-      return dataModels[typeName];
+      return { ...dataModels[typeName] };
     } else if (typeof response === 'object' && response.type === 'object') {
       return response;
     }
