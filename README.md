@@ -1,6 +1,6 @@
 # VG：项目代码生成工具
 
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/vg-code-hub/vg-vscode-extension)
+[![Ask DeepWiki](https://img.shields.io/badge/Ask%20DeepWiki-blue?logo=openai)](https://deepwiki.com/vg-code-hub/vg-vscode-extension)
 
 你需要一个工具来自动生成规范的目录结构和常用页面文件。同时，还需要能够自动生成路由文件，将图片从 3.0x 转换为 1x 和 2x，以及将 Swagger 转换为请求和模型格式。这些任务需要自动化完成，你是否已经在寻找现有的工具或库来帮助你完成这些任务呢？
 
