@@ -1,5 +1,5 @@
 import { Material, camelCase, compile as compileEjs, existsSync, find, join, writeFile } from '@root/utils';
-import { DART_TYPE, INDENT, SwaggerGenTool, getDartType } from '../../utils';
+import { DART_TYPE, INDENT, SwaggerGenTool, getDartDefaultValue, getDartType } from '../../utils';
 import { IDescriptionOption, JSONSchema, Method, SwaggerParameter } from '../../index.d';
 import { PlatformImplementor } from '.';
 import { filter } from 'lodash';
@@ -229,7 +229,7 @@ class ${className} {\n`;
     const { paths, querys, formData, body } = options;
     const { urlPrefix } = SwaggerGenTool.config;
     const path = (urlPrefix ?? '') + key;
-    if (!formData && !body && paths.length === 0 && querys.length === 0) return `'${path}'${['put', 'post'].includes(method) ? ', {}' : ''}`;
+    if (!formData && !body && paths.length === 0 && querys.length === 0) return `'${path}'${['put', 'post'].includes(method) ? ', null' : ''}`;
 
     let str = '',
       reqPath = path,
@@ -250,7 +250,7 @@ class ${className} {\n`;
       else if (type && ['int', 'double'].includes(type)) suffix = `.toString()`;
       str += `, body${suffix}`;
     } else if (!body && ['put', 'post'].includes(method) && !formData) {
-      str += `, {}`;
+      str += `, null`;
     }
     if (formData && !str.includes(', body') && ['put', 'post'].includes(method)) str += ', body';
 
@@ -268,7 +268,7 @@ class ${className} {\n`;
       queryStr += '}';
     }
     if (queryStr.length !== 0) str += `, query: ${queryStr}`;
-    if (!str.includes(',') && ['put', 'post'].includes(method)) str += ', {}';
+    if (!str.includes(',') && ['put', 'post'].includes(method)) str += ', null';
     return str;
   }
 
@@ -282,7 +282,8 @@ class ${className} {\n`;
 
     let type = returnType;
     if (DART_TYPE.includes(type) || type === 'List<Map<String, dynamic>>') {
-      return `\n${INDENT}${INDENT}return ${resName};`;
+      const safeRes = `\n${INDENT}${INDENT}if (res.body is! Map || res.body['data'] is! ${type}) return ${getDartDefaultValue(type)};`;
+      return `${safeRes}\n${INDENT}${INDENT}return ${resName};`;
     } else if (type.startsWith('List<')) {
       const subType = type.substring(5, type.length - 1);
       const value = SwaggerGenTool.dataModels[subType] ?? standardRes;

@@ -2,14 +2,15 @@
  * @Author: zdd
  * @Date: 2023-06-01 16:59:31
  * @LastEditors: zdd jimmyzhao163@163.com
- * @LastEditTime: 2025-04-08 14:59:56
+ * @LastEditTime: 2025-06-12 17:55:06
  * @FilePath: common.ts
  * @Description:
  */
+import { upperFirst, words } from 'lodash';
 import { JSONSchema, SwaggerHttpEndpoint, SwaggerParameter } from '../index.d';
 import SwaggerGenTool from './gen_tool';
 import { exchangeZhToEn } from './helper';
-import { first, join, snakeCase, pascalCase, camelCase, rootPath } from '@root/utils';
+import { first, join, snakeCase, pascalCase, camelCase } from '@root/utils';
 
 /** tab 空格数 */
 export const INDENT = '  ';
@@ -28,6 +29,31 @@ export interface TypeParam {
   key?: string;
   property?: JSONSchema;
   param?: SwaggerParameter;
+}
+
+export function getDartDefaultValue(type: string) {
+  switch (type) {
+    case 'int':
+    case 'double':
+    case 'num':
+      return 0;
+    case 'String':
+      return "''";
+    case 'bool':
+      return 'false';
+    case 'DateTime':
+      return `DateTime.now()`;
+    case 'null':
+      return 'null';
+    case 'dynamic':
+      return 'null';
+    case 'List':
+      return '[]';
+    case 'Map<String, dynamic>':
+      return '{}';
+    default:
+      return '';
+  }
 }
 
 export function getClassName(name: string, isReq = true) {
@@ -224,17 +250,61 @@ export function getResSchema(schema: JSONSchema) {
   return _val;
 }
 
-export function getModelName(key: string) {
-  let className;
-
+export function getModelName(inputStr: string) {
   const schemasPackageMap = SwaggerGenTool.config.schemasPackageMap ?? {};
-  if (!key.includes('.')) {
-    className = pascalCase(key);
-  } else {
-    let [a, b] = key.split('.');
-    a = Object.keys(schemasPackageMap).includes(a) ? schemasPackageMap[a] : a;
-    if (!a || RegExp(`^${pascalCase(a)}`, 'i').test(b)) className = pascalCase(b);
-    else className = pascalCase(a + '_' + b);
+
+  // 1. 查找最长匹配前缀
+  const matchedPrefix = findLongestMatchingPrefix(inputStr, Object.keys(schemasPackageMap));
+  if (!matchedPrefix && !inputStr.includes('.')) return upperFirst(camelCase(inputStr));
+
+  // 2. 应用映射并处理剩余部分
+  const remainingPart = matchedPrefix ? inputStr.replace(matchedPrefix, schemasPackageMap[matchedPrefix] ?? '') : inputStr;
+
+  // 3. 处理无层级结构的简单情况
+  if (!remainingPart.includes('.')) {
+    return upperFirst(camelCase(remainingPart));
   }
-  return className;
+
+  // 4. 处理层级结构（目前只考虑一个点）
+  const [partB, partA] = remainingPart.split('.').reverse(); // 反转以便处理最后一段
+  // const partA = parts.slice(0, -1).join('.'); // 获取最后一段前的所有部分
+  // const partB = parts[parts.length - 1]; // 获取最后一段
+  if (inputStr.includes('gps_entity')) {
+    console.log(inputStr);
+  }
+  // 5. 转换为单词数组
+  const partAWords = words(upperFirst(camelCase(partA)));
+  const partBWords = words(upperFirst(camelCase(partB)));
+  if (!partAWords.length) return partBWords.join('');
+  if (!partBWords.length) return partAWords.join('');
+
+  // 6. 查找并合并重叠部分
+  const overlapIndex = findOverlapIndex(partAWords, partBWords);
+  return mergeWordArrays(partAWords, partBWords, overlapIndex);
+}
+
+// 辅助函数：查找最长匹配前缀
+function findLongestMatchingPrefix(input: string, prefixes: string[]) {
+  // 按长度降序排序以确保优先匹配最长前缀
+  const sortedPrefixes = [...prefixes].sort((a, b) => b.length - a.length);
+  return sortedPrefixes.find((prefix) => input.startsWith(prefix)) || null;
+}
+
+// 辅助函数：查找单词数组重叠位置
+function findOverlapIndex(wordsA: string[], wordsB: string[]) {
+  const maxPossibleOverlap = Math.min(wordsA.length, wordsB.length);
+
+  // 从最大可能重叠开始向下搜索
+  for (let overlap = maxPossibleOverlap; overlap > 0; overlap--) {
+    const suffixOfA = wordsA.slice(-overlap).join('');
+    const prefixOfB = wordsB.slice(0, overlap).join('');
+    if (suffixOfA === prefixOfB) return overlap;
+  }
+  return 0; // 无重叠
+}
+
+// 辅助函数：合并两个单词数组
+function mergeWordArrays(wordsA: string[], wordsB: string[], overlap: number) {
+  const words = [...wordsA, ...wordsB.slice(overlap)];
+  return words.filter((item, index) => index === 0 || item !== words[index - 1]).join('');
 }

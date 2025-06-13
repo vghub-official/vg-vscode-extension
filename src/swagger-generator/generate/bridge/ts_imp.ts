@@ -243,7 +243,7 @@ import { http } from '${join(...Array(deeps - 1).fill('..'), 'base_http')}';\n`;
       }
     }
     if (formData && !str.includes(', body') && ['put', 'post'].includes(method)) str += ', body';
-    if (querys.length > 0) str += `, query`;
+    if (querys.length > 0) str += ['put', 'post', 'delete'].includes(method) ? `${str.includes(', body') ? '' : ', undefined'}, { params: query }` : `, query`;
     return str;
   }
 

@@ -40,6 +40,8 @@
 
 ## 系统架构概述
 
+<img src="images/1749802715599.png" width="80%" />
+
 ```mermaid
 flowchart TD
     subgraph User Interface
@@ -74,6 +76,8 @@ flowchart TD
 ```
 
 ## 代码生成流程
+
+<img src="images/1749802773585.png" width="80%" />
 
 ```mermaid
 flowchart LR

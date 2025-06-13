@@ -79,7 +79,7 @@ class RequestGenerate {
     let folder = SwaggerGenTool.getFolder(key, method, value);
     if (!folder) return;
     let { dirPath, deeps, className } = getDirPath(folder);
-    if (key.startsWith('/v3/co/warehouse/inventory_details')) {
+    if (key.startsWith('/v3/co/project/dispatch-enters')) {
       console.log({ key });
       console.log(value.successResponse);
     }

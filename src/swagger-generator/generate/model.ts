@@ -1,8 +1,8 @@
 /*
  * @Author: zdd
  * @Date: 2023-05-31 22:05:06
- * @LastEditors: zdd dongdong@grizzlychina.com
- * @LastEditTime: 2024-01-24 10:42:56
+ * @LastEditors: zdd jimmyzhao163@163.com
+ * @LastEditTime: 2025-06-12 17:05:33
  * @FilePath: model.ts
  * @Description:
  */
@@ -76,6 +76,9 @@ class ModelGenerate {
   checkSubGen(properties: JSONSchema['properties']) {
     for (const propertyName in properties) {
       const property = properties[propertyName];
+      if ('gps' == propertyName) {
+        console.log(`[${propertyName}] is gps, skip generate model`);
+      }
       const propType = SwaggerGenTool.implementor.getSchameType({ key: propertyName, property });
       const { baseTypes, isArrPropType, arraySubClass } = SwaggerGenTool.implementor;
 
