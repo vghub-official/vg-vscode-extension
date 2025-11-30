@@ -305,3 +305,33 @@ Dependencies:
 - md5
 - mkdirp
 - yaml
+
+# 代码格式化
+
+本项目已配置代码保存时自动格式化功能。详细信息请参见 [代码格式化指南](docs/formatting.md)。
+
+## 功能特性
+
+- 保存代码时自动格式化（需要安装推荐的 VS Code 扩展）
+- 统一的代码风格配置
+- 支持手动格式化命令
+- CI/CD 集成检查
+
+## 快速开始
+
+1. 安装推荐的 VS Code 扩展：
+
+   - Prettier - Code formatter (`esbenp.prettier-vscode`)
+   - ESLint (`dbaeumer.vscode-eslint`)
+
+2. 编辑代码并保存，代码将自动格式化
+
+3. 或者使用命令行格式化：
+
+   ```bash
+   # 格式化所有代码
+   pnpm run format
+
+   # 检查代码格式
+   pnpm run format:check
+   ```

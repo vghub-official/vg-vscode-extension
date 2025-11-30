@@ -1,20 +1,18 @@
 /*
  * @Author: zdd
  * @Date: 2023-06-27 22:01:26
- * @LastEditors: jimmyZhao
- * @LastEditTime: 2023-10-07 14:21:55
+ * @LastEditors: Zdd 445305451@qq.com
+ * @LastEditTime: 2025-11-30 10:06:41
  * @FilePath: /vg-vscode-extension/webview-react/src/app.tsx
  * @Description: 
  */
 // 运行时配置
-import { RunTimeLayoutConfig } from '@umijs/max';
 import { autoFixContext } from 'react-activation';
 import jsxDevRuntime from 'react/jsx-dev-runtime';
 import jsxRuntime from 'react/jsx-runtime';
-import { theme } from 'antd';
 import './app.less';
+import './dark.less';
 import { IGetLocalMaterialsResult, downloadMaterials, getLocalMaterials, getMaterialLocalList } from './common';
-
 
 autoFixContext(
   [jsxRuntime, 'jsx', 'jsxs', 'jsxDEV'],
@@ -32,33 +30,3 @@ export async function getInitialState(): Promise<{ name: string, materialLocalKe
   }
   return { name: '@umijs/max', localMaterials: data, materialLocalKey };
 }
-
-export const layout: RunTimeLayoutConfig = () => {
-  const { token } = theme.useToken();
-
-  return {
-    logo: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
-    menu: {
-      locale: false,
-    },
-    layout: 'top',
-    fixedHeader: true,
-    actionsRender: () => [<div></div>],
-    token: {
-      header: {
-        colorMenuBackground: token.colorBgContainer,
-        colorBgMenuItemSelected: token.colorPrimaryBg,
-        colorTextMenuSelected: token.colorPrimary,
-        colorTextCollapsedButton: token.colorPrimary,
-        colorTextCollapsedButtonHover: token.colorPrimaryBgHover,
-      },
-      sider: {
-        colorMenuBackground: token.colorBgContainer,
-        colorBgMenuItemSelected: token.colorPrimaryBg,
-        colorTextMenuSelected: token.colorPrimary,
-        colorTextCollapsedButton: token.colorPrimary,
-        colorTextCollapsedButtonHover: token.colorPrimaryBgHover,
-      },
-    },
-  };
-};

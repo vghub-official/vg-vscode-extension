@@ -2,9 +2,10 @@
   "private": true,
   "author": "zdd <dongdong@grizzlychina.com>",
   "scripts": {
-    "dev": "max dev",
     "build": "max build",
+    "dev": "max dev",
     "format": "prettier --cache --write .",
+    "format:check": "prettier --check .",
     "postinstall": "max setup",
     "setup": "max setup",
     "start": "npm run dev"

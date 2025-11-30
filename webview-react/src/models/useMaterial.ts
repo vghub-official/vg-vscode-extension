@@ -42,7 +42,9 @@ export default function Page() {
     if (initialState?.localMaterials) {
       setDataList(initialState.localMaterials[activeKey]);
     }
-    setMaterialLocalKeys(initialState?.materialLocalKey ?? []);
+    // 确保 materialLocalKeys 是一个数组
+    const localKeys = initialState?.materialLocalKey ?? [];
+    setMaterialLocalKeys(Array.isArray(localKeys) ? localKeys : []);
   }, [initialState?.localMaterials, activeKey]);
 
   return {

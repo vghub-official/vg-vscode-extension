@@ -1,0 +1,1182 @@
+// 深色模式样式文件
+// 定义深色模式下的CSS变量和样式规则
+
+// 深色模式下的全局样式
+.dark {
+  // 背景色
+  --bg-color: #141414;
+  --component-bg: #1d1d1d;
+  --popover-bg: #262626;
+
+  // 文字颜色
+  --text-color: rgba(255, 255, 255, 0.85);
+  --text-color-secondary: rgba(255, 255, 255, 0.65);
+  --text-color-tertiary: rgba(255, 255, 255, 0.45);
+
+  // 边框颜色
+  --border-color: #424242;
+
+  // 悬停背景色
+  --hover-bg: rgba(255, 255, 255, 0.05);
+
+  // 链接颜色
+  --link-color: #177ddc;
+
+  // 修改Ant Design的默认变量
+  --ant-primary-color: #177ddc;
+  --ant-primary-color-hover: #3c9be8;
+  --ant-primary-color-active: #095cb5;
+  .ant-pro-layout {
+    .ant-layout-header.ant-pro-layout-header {
+      background: var(--component-bg);
+      color: var(--text-color);
+    }
+    // 针对 ProLayout 背景列表的深色模式适配
+    .ant-pro-layout-bg-list {
+      background: transparent;
+    }
+  }
+
+  .ant-layout-sider,
+  .ant-layout-content {
+    background: var(--component-bg);
+    color: var(--text-color);
+  }
+
+  // 专门针对 ant-tabs 的深色模式适配
+  .ant-tabs {
+    color: var(--text-color);
+
+    // 标签页头部
+    .ant-tabs-nav {
+      background: var(--component-bg);
+      border-color: var(--border-color);
+
+      // 标签页项
+      .ant-tabs-tab {
+        color: var(--text-color-secondary);
+        background: transparent;
+
+        // 悬停状态
+        &:hover {
+          color: var(--text-color);
+        }
+
+        // 选中状态
+        &.ant-tabs-tab-active {
+          color: var(--ant-primary-color);
+
+          .ant-tabs-tab-btn {
+            color: var(--ant-primary-color);
+          }
+        }
+      }
+
+      // 激活指示条
+      .ant-tabs-ink-bar {
+        background: var(--ant-primary-color);
+      }
+    }
+
+    // 标签页内容区域
+    .ant-tabs-content-holder {
+      color: var(--text-color);
+
+      .ant-tabs-tabpane {
+        color: var(--text-color);
+      }
+    }
+  }
+
+  // 专门针对 ant-menu 和 ant-menu-root 的深色模式适配
+  .ant-menu {
+    background: var(--component-bg);
+    color: var(--text-color);
+
+    // 菜单项通用样式
+    .ant-menu-item {
+      &:hover {
+        background: var(--hover-bg);
+        color: var(--text-color);
+      }
+
+      &::after {
+        border-color: var(--ant-primary-color);
+      }
+    }
+
+    // 选中的菜单项
+    .ant-menu-item-selected {
+      background: rgba(23, 125, 220, 0.1);
+      color: var(--ant-primary-color);
+    }
+
+    // 子菜单选中标题样式（修复特定类名的选择器）
+    .ant-menu-light .ant-menu-submenu-selected > .ant-menu-submenu-title,
+    .ant-menu-light
+      > .ant-menu
+      .ant-menu-submenu-selected
+      > .ant-menu-submenu-title {
+      color: var(--ant-primary-color);
+      background: var(--hover-bg);
+    }
+
+    // 修复特定类名的选择器在深色模式下的样式
+    .ant-menu-light .ant-menu-item,
+    .ant-menu-light > .ant-menu .ant-menu-item,
+    .ant-menu-light .ant-menu-submenu-title,
+    .ant-menu-light > .ant-menu .ant-menu-submenu-title {
+      color: var(--text-color);
+      background: var(--component-bg);
+
+      &:hover {
+        color: var(--text-color);
+        background: var(--hover-bg);
+      }
+    }
+
+    // 子菜单的样式
+    .ant-menu-sub {
+      background: var(--popover-bg);
+
+      .ant-menu-item {
+        &:hover {
+          background: var(--hover-bg);
+        }
+      }
+    }
+
+    // 内联菜单的特殊处理
+    &.ant-menu-inline {
+      border-right: 1px solid var(--border-color);
+    }
+
+    // 水平菜单的特殊处理
+    &.ant-menu-horizontal {
+      border-bottom: none;
+
+      .ant-menu-item {
+        top: 0;
+
+        &:hover {
+          background: var(--hover-bg);
+        }
+      }
+    }
+
+    // 深色主题菜单（如果使用了 dark 主题）
+    &.ant-menu-dark {
+      background: #1d1d1d;
+
+      .ant-menu-item {
+        color: rgba(255, 255, 255, 0.65);
+
+        &:hover {
+          background: transparent;
+          color: #fff;
+        }
+      }
+
+      .ant-menu-item-selected {
+        background: var(--ant-primary-color);
+        color: #fff;
+      }
+
+      // 修复深色主题下子菜单的样式
+      .ant-menu-sub {
+        background: #1d1d1d;
+
+        .ant-menu-item {
+          color: rgba(255, 255, 255, 0.65);
+
+          &:hover {
+            background: transparent;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  // 针对根菜单的特殊处理
+  .ant-menu-root {
+    // 确保根菜单在深色模式下有正确的背景和文字颜色
+    &.ant-menu-horizontal {
+      background: transparent;
+
+      .ant-menu-item {
+        color: var(--text-color);
+
+        &:hover {
+          background: var(--hover-bg);
+          color: var(--text-color);
+        }
+
+        &.ant-menu-item-selected {
+          color: var(--ant-primary-color);
+          background: var(--hover-bg);
+        }
+      }
+    }
+
+    // 修复垂直菜单根节点的样式
+    &.ant-menu-inline,
+    &.ant-menu-vertical {
+      background: var(--component-bg);
+      border-right: 1px solid var(--border-color);
+
+      .ant-menu-item {
+        color: var(--text-color);
+
+        &:hover {
+          background: var(--hover-bg);
+          color: var(--text-color);
+        }
+
+        &.ant-menu-item-selected {
+          color: var(--ant-primary-color);
+          background: rgba(23, 125, 220, 0.1);
+        }
+      }
+    }
+  }
+
+  .ant-card {
+    background: var(--component-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+  }
+
+  // 专门针对 ant-pro-card 的深色模式适配
+  .ant-pro-card {
+    background: var(--component-bg);
+    color: var(--text-color);
+    border-color: var(--border-color);
+
+    // 卡片头部样式
+    .ant-pro-card-header {
+      background: var(--component-bg);
+      color: var(--text-color);
+      border-color: var(--border-color);
+    }
+
+    // 卡片分割线样式
+    .ant-pro-card-divider {
+      border-color: var(--border-color);
+    }
+
+    // 卡片分组样式
+    .ant-pro-card-group {
+      background: var(--component-bg);
+      color: var(--text-color);
+    }
+  }
+
+  // 专门针对 ant-collapse 的深色模式适配
+  .ant-collapse {
+    background: var(--component-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+
+    // 折叠面板项样式
+    .ant-collapse-item {
+      border-color: var(--border-color);
+      background: var(--component-bg);
+
+      // 折叠面板头部样式
+      .ant-collapse-header {
+        background: var(--component-bg);
+        color: var(--text-color);
+        border-color: var(--border-color);
+
+        // 头部文字颜色
+        .ant-collapse-header-text {
+          color: var(--text-color);
+        }
+      }
+
+      // 折叠面板内容样式
+      .ant-collapse-content {
+        background: var(--popover-bg);
+        color: var(--text-color);
+        border-color: var(--border-color);
+
+        .ant-collapse-content-box {
+          background: var(--popover-bg);
+          color: var(--text-color);
+        }
+      }
+    }
+
+    // ghost 模式的折叠面板样式
+    &.ant-collapse-ghost {
+      background: transparent;
+
+      .ant-collapse-item {
+        .ant-collapse-content {
+          background: transparent;
+
+          .ant-collapse-content-box {
+            background: transparent;
+          }
+        }
+      }
+    }
+  }
+
+  .ant-table {
+    background: var(--component-bg);
+    color: var(--text-color);
+
+    .ant-table-thead > tr > th {
+      background: var(--popover-bg);
+      color: var(--text-color);
+    }
+
+    .ant-table-tbody > tr:hover > td {
+      background: var(--hover-bg);
+    }
+
+    // 表格展开行图标适配
+    .ant-table-row-expand-icon {
+      background: var(--component-bg);
+      border-color: var(--border-color);
+
+      &:hover {
+        background: var(--hover-bg);
+        border-color: var(--link-color);
+      }
+    }
+
+    // 展开行单元格样式
+    .ant-table-row-expand-icon-cell {
+      background: var(--component-bg);
+    }
+  }
+
+  // 修复header中的文字颜色
+  .ant-layout-header {
+    .ant-menu {
+      color: var(--text-color);
+
+      .ant-menu-item {
+        color: var(--text-color);
+
+        &:hover {
+          color: var(--text-color);
+        }
+      }
+
+      .ant-menu-item-selected {
+        color: var(--ant-primary-color);
+      }
+    }
+
+    .umi-plugin-layout-name {
+      color: var(--text-color);
+    }
+
+    // 修复ProLayout标题颜色
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: var(--text-color);
+    }
+
+    // 特别针对ProLayout标题
+    .ant-pro-layout-title {
+      color: var(--text-color);
+    }
+  }
+
+  // 修复页面中其他组件的颜色适配
+  .ant-pro-page-container {
+    color: var(--text-color);
+
+    .ant-page-header {
+      color: var(--text-color);
+
+      .ant-page-header-heading-title {
+        color: var(--text-color);
+      }
+
+      .ant-page-header-heading-sub-title {
+        color: var(--text-color-secondary);
+      }
+    }
+  }
+
+  // 修复链接颜色
+  a {
+    &:hover {
+      color: var(--ant-primary-color-hover);
+    }
+  }
+
+  // 修复按钮颜色
+  .ant-btn {
+    color: var(--text-color);
+    background: var(--component-bg);
+    border-color: var(--border-color);
+
+    &:hover {
+      color: var(--link-color);
+      border-color: var(--link-color);
+    }
+
+    &.ant-btn-primary {
+      color: #fff;
+      background: var(--link-color);
+      border-color: var(--link-color);
+
+      &:hover {
+        background: var(--ant-primary-color-hover);
+        border-color: var(--ant-primary-color-hover);
+      }
+    }
+  }
+
+  // 修复图标按钮颜色
+  .anticon {
+    color: var(--text-color);
+  }
+
+  // 修复CodeMirror编辑器在深色模式下的显示
+  .CodeMirror {
+    background: var(--component-bg);
+    color: var(--text-color);
+  }
+
+  .CodeMirror-gutters {
+    background: var(--popover-bg);
+    border-right: 1px solid var(--border-color);
+  }
+
+  // 修复其他可能的组件
+  .ant-typography {
+    color: var(--text-color);
+  }
+
+  .ant-input {
+    background: var(--component-bg);
+    color: var(--text-color);
+    border-color: var(--border-color);
+  }
+
+  .ant-select {
+    color: var(--text-color);
+
+    .ant-select-selector {
+      background: var(--component-bg);
+      color: var(--text-color);
+      border-color: var(--border-color);
+    }
+  }
+
+  // 专门针对 ant-pro-table 的深色模式适配
+  .ant-pro-table,
+  .ant-table-wrapper {
+    // 表格容器背景
+    background: var(--component-bg);
+    border-color: var(--border-color);
+
+    // 表格头部样式
+    .ant-table-thead {
+      > tr {
+        > th {
+          background: var(--popover-bg);
+          color: var(--text-color);
+          border-color: var(--border-color);
+        }
+      }
+    }
+
+    // 表格主体样式
+    .ant-table-tbody {
+      > tr {
+        > td {
+          background: var(--component-bg);
+          color: var(--text-color);
+          border-color: var(--border-color);
+
+          // 悬停行样式
+          &:hover {
+            background: var(--hover-bg);
+          }
+        }
+
+        // 偶数行样式
+        &:nth-child(2n) {
+          > td {
+            background: var(--popover-bg);
+          }
+        }
+
+        // 选中行样式
+        &.ant-table-row-selected {
+          > td {
+            background: rgba(23, 125, 220, 0.1);
+          }
+        }
+
+        .ant-table-placeholder:hover > th,
+        .ant-table-placeholder:hover > td,
+        .ant-table-placeholder {
+          background: var(--component-bg);
+        }
+      }
+    }
+
+    // 表格空状态占位符
+    .ant-table-placeholder {
+      background: var(--component-bg);
+      color: var(--text-color-secondary);
+
+      .ant-empty-normal {
+        color: var(--text-color-secondary);
+
+        .ant-empty-image {
+          opacity: 0.7;
+        }
+      }
+    }
+
+    // 表格主体样式
+    .ant-pro-table-alert {
+      background: var(--popover-bg);
+      border-color: var(--border-color);
+
+      .ant-pro-table-alert-info {
+        color: var(--text-color);
+      }
+    }
+
+    // 表格工具栏样式
+    .ant-pro-table-toolbar,
+    .ant-pro-table-list-toolbar {
+      background: var(--component-bg);
+      border-color: var(--border-color);
+
+      .ant-pro-table-toolbar-title {
+        color: var(--text-color);
+        font-weight: 500;
+        font-size: 16px;
+      }
+
+      // 修复列表工具栏标题在深色模式下的颜色显示问题
+      .ant-pro-table-list-toolbar-title {
+        color: var(--text-color);
+        font-weight: 500;
+        font-size: 16px;
+      }
+
+      .ant-pro-table-toolbar-option {
+        color: var(--text-color);
+
+        .ant-btn {
+          color: var(--text-color);
+          background: var(--component-bg);
+          border-color: var(--border-color);
+
+          &:hover {
+            color: var(--link-color);
+            border-color: var(--link-color);
+          }
+
+          &.ant-btn-primary {
+            color: #fff;
+            background: var(--link-color);
+            border-color: var(--link-color);
+
+            &:hover {
+              background: var(--ant-primary-color-hover);
+              border-color: var(--ant-primary-color-hover);
+            }
+          }
+        }
+      }
+    }
+
+    // 表格展开行图标适配
+    .ant-table-row-expand-icon {
+      background: var(--component-bg);
+      border-color: var(--border-color);
+
+      &:hover {
+        background: var(--hover-bg);
+        border-color: var(--link-color);
+      }
+    }
+
+    // 展开行单元格样式
+    .ant-table-row-expand-icon-cell {
+      background: var(--component-bg);
+    }
+
+    // 分页器样式
+    .ant-pagination {
+      .ant-pagination-item {
+        background: var(--component-bg);
+        border-color: var(--border-color);
+
+        a {
+          color: var(--text-color);
+        }
+
+        &.ant-pagination-item-active {
+          background: var(--link-color);
+          border-color: var(--link-color);
+
+          a {
+            color: #fff;
+          }
+        }
+      }
+
+      .ant-pagination-prev,
+      .ant-pagination-next {
+        .ant-pagination-item-link {
+          background: var(--component-bg);
+          border-color: var(--border-color);
+          color: var(--text-color);
+        }
+      }
+
+      .ant-pagination-jump-prev,
+      .ant-pagination-jump-next {
+        .ant-pagination-item-link-icon {
+          color: var(--text-color);
+        }
+      }
+
+      .ant-pagination-options {
+        .ant-select {
+          color: var(--text-color);
+
+          .ant-select-selector {
+            background: var(--component-bg);
+            color: var(--text-color);
+            border-color: var(--border-color);
+          }
+        }
+      }
+    }
+  }
+
+  // 专门针对 ant-pro-checkcard 的深色模式适配
+  .ant-pro-checkcard {
+    background: var(--component-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+
+    &:hover {
+      border-color: var(--link-color);
+    }
+
+    &.ant-pro-checkcard-checked {
+      border-color: var(--link-color);
+      box-shadow: 0 0 0 2px var(--link-color);
+
+      .ant-pro-checkcard-content {
+        color: var(--text-color);
+      }
+    }
+
+    &.ant-pro-checkcard-disabled {
+      background: var(--popover-bg);
+      border-color: var(--border-color);
+      color: var(--text-color-tertiary);
+
+      .ant-pro-checkcard-content {
+        color: var(--text-color-tertiary);
+      }
+    }
+
+    .ant-pro-checkcard-content {
+      color: var(--text-color);
+    }
+
+    .ant-pro-checkcard-description {
+      color: var(--text-color-secondary);
+    }
+
+    .ant-pro-checkcard-avatar {
+      color: var(--text-color);
+    }
+
+    .ant-pro-checkcard-title {
+      color: var(--text-color);
+    }
+  }
+
+  // 专门针对 ant-popover 的深色模式适配
+  .ant-popover {
+    color: var(--text-color);
+
+    // 气泡卡片内容区域
+    .ant-popover-inner {
+      background: var(--popover-bg);
+      color: var(--text-color);
+    }
+
+    // 气泡卡片标题
+    .ant-popover-title {
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-color);
+      background: var(--popover-bg);
+    }
+
+    // 气泡卡片内容
+    .ant-popover-inner-content {
+      color: var(--text-color);
+      background: var(--popover-bg);
+    }
+
+    // 气泡卡片箭头
+    .ant-popover-arrow {
+      background: var(--popover-bg);
+      border-color: var(--popover-bg);
+    }
+
+    // 气泡卡片箭头内容
+    .ant-popover-arrow-content {
+      background: var(--popover-bg);
+      border-color: var(--popover-bg);
+    }
+  }
+
+  // 专门针对 ant-tooltip 的深色模式适配
+  .ant-tooltip {
+    color: var(--text-color);
+
+    // 工具提示内容区域
+    .ant-tooltip-inner {
+      background: var(--popover-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+    }
+
+    // 工具提示箭头
+    .ant-tooltip-arrow {
+      background: var(--popover-bg);
+      border-color: var(--popover-bg);
+    }
+
+    // 工具提示箭头内容
+    .ant-tooltip-arrow-content {
+      background: var(--popover-bg);
+      border-color: var(--border-color);
+    }
+  }
+
+  // 专门针对 ant-dropdown 的深色模式适配
+  .ant-dropdown {
+    color: var(--text-color);
+
+    // 下拉菜单
+    .ant-dropdown-menu {
+      background: var(--popover-bg);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.32);
+    }
+
+    // 下拉菜单项
+    .ant-dropdown-menu-item {
+      color: var(--text-color);
+
+      &:hover {
+        background: var(--hover-bg);
+      }
+
+      &.ant-dropdown-menu-item-active,
+      &.ant-dropdown-menu-item-selected {
+        background: rgba(23, 125, 220, 0.1);
+        color: var(--ant-primary-color);
+      }
+
+      &.ant-dropdown-menu-item-disabled {
+        color: var(--text-color-tertiary);
+      }
+    }
+
+    // 下拉菜单分割线
+    .ant-dropdown-menu-item-divider {
+      background: var(--border-color);
+    }
+
+    // 下拉菜单子菜单
+    .ant-dropdown-menu-submenu {
+      background: var(--popover-bg);
+    }
+
+    // 下拉菜单子菜单标题
+    .ant-dropdown-menu-submenu-title {
+      color: var(--text-color);
+
+      &:hover {
+        background: var(--hover-bg);
+      }
+    }
+
+    // 下拉菜单子菜单箭头
+    .ant-dropdown-menu-submenu-arrow {
+      color: var(--text-color-secondary);
+    }
+  }
+
+  // 专门针对 ant-notification 的深色模式适配
+  .ant-notification {
+    color: var(--text-color);
+
+    // 通知提醒框
+    .ant-notification-notice {
+      background: var(--popover-bg);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.32);
+
+      // 通知提醒框图标
+      .ant-notification-notice-icon {
+        color: var(--text-color);
+      }
+
+      // 通知提醒框内容
+      .ant-notification-notice-message {
+        color: var(--text-color);
+      }
+
+      // 通知提醒框描述
+      .ant-notification-notice-description {
+        color: var(--text-color-secondary);
+      }
+
+      // 通知提醒框关闭按钮
+      .ant-notification-notice-close {
+        color: var(--text-color-secondary);
+
+        &:hover {
+          color: var(--text-color);
+        }
+      }
+
+      // 通知提醒框底部操作区域
+      .ant-notification-notice-btn {
+        .ant-btn {
+          color: var(--text-color);
+          background: var(--component-bg);
+          border-color: var(--border-color);
+
+          &:hover {
+            color: var(--link-color);
+            border-color: var(--link-color);
+          }
+
+          &.ant-btn-primary {
+            color: #fff;
+            background: var(--link-color);
+            border-color: var(--link-color);
+
+            &:hover {
+              background: var(--ant-primary-color-hover);
+              border-color: var(--ant-primary-color-hover);
+            }
+          }
+        }
+      }
+    }
+
+    // 通知提醒框全局样式
+    .ant-notification-top,
+    .ant-notification-bottom,
+    .ant-notification-topLeft,
+    .ant-notification-topRight,
+    .ant-notification-bottomLeft,
+    .ant-notification-bottomRight {
+      .ant-notification-notice {
+        background: var(--popover-bg);
+        border: 1px solid var(--border-color);
+      }
+    }
+  }
+
+  // 专门针对 ant-spin 的深色模式适配
+  .ant-spin {
+    color: var(--text-color);
+
+    // 加载指示器
+    .ant-spin-dot-item {
+      background-color: var(--ant-primary-color);
+    }
+
+    // 加载文本
+    .ant-spin-text {
+      color: var(--text-color);
+    }
+
+    // 加载容器
+    .ant-spin-container {
+      color: var(--text-color);
+    }
+
+    // 嵌套内容
+    .ant-spin-container::after {
+      background: var(--component-bg);
+    }
+  }
+
+  // 专门针对 ant-pro-page-container 的深色模式适配
+  .ant-pro-page-container {
+    background: var(--bg-color);
+
+    .ant-page-header {
+      background: var(--component-bg);
+      border-color: var(--border-color);
+
+      .ant-page-header-heading-title {
+        color: var(--text-color);
+      }
+
+      .ant-page-header-heading-sub-title {
+        color: var(--text-color-secondary);
+      }
+    }
+
+    .ant-pro-page-container-children-content {
+      background: var(--bg-color);
+    }
+  }
+
+  // 专门针对 form-render 的深色模式适配
+  .fr-container,
+  .ant-form {
+    background: var(--bg-color);
+    color: var(--text-color);
+
+    // 表单项标题
+    .fr-item-label {
+      color: var(--text-color);
+    }
+
+    // 输入框相关组件
+    .ant-input,
+    .ant-select-selector,
+    .ant-picker,
+    .ant-input-number,
+    .ant-cascader-picker,
+    .ant-tree-select {
+      background: var(--component-bg);
+      border-color: var(--border-color);
+      color: var(--text-color);
+
+      &:hover {
+        border-color: var(--ant-primary-color);
+      }
+
+      &:focus {
+        border-color: var(--ant-primary-color);
+        box-shadow: 0 0 0 2px rgba(23, 125, 220, 0.2);
+      }
+    }
+
+    // 下拉菜单
+    .ant-select-dropdown {
+      background: var(--popover-bg);
+      border-color: var(--border-color);
+
+      .ant-select-item {
+        color: var(--text-color);
+
+        &.ant-select-item-option-active {
+          background: var(--hover-bg);
+        }
+
+        &.ant-select-item-option-selected {
+          background: rgba(23, 125, 220, 0.1);
+          color: var(--ant-primary-color);
+        }
+      }
+    }
+
+    // 复选框和单选框
+    .ant-checkbox-wrapper,
+    .ant-radio-wrapper {
+      color: var(--text-color);
+    }
+
+    .ant-checkbox-inner,
+    .ant-radio-inner {
+      background: var(--component-bg);
+      border-color: var(--border-color);
+    }
+
+    .ant-checkbox-checked .ant-checkbox-inner,
+    .ant-radio-checked .ant-radio-inner {
+      background: var(--ant-primary-color);
+      border-color: var(--ant-primary-color);
+    }
+
+    // 开关组件
+    .ant-switch {
+      background: var(--border-color);
+
+      &.ant-switch-checked {
+        background: var(--ant-primary-color);
+      }
+    }
+
+    // 按钮组件
+    .ant-btn {
+      background: var(--component-bg);
+      border-color: var(--border-color);
+      color: var(--text-color);
+
+      &:hover {
+        color: var(--ant-primary-color);
+        border-color: var(--ant-primary-color);
+      }
+
+      &.ant-btn-primary {
+        background: var(--ant-primary-color);
+        border-color: var(--ant-primary-color);
+        color: #fff;
+
+        &:hover {
+          background: var(--ant-primary-color-hover);
+          border-color: var(--ant-primary-color-hover);
+        }
+      }
+
+      // 链接样式按钮
+      &.ant-btn-color-link.ant-btn-variant-link {
+        background: transparent;
+        border-color: transparent;
+        color: var(--ant-primary-color);
+        box-shadow: none;
+
+        &:hover {
+          color: var(--ant-primary-color-hover);
+        }
+
+        // 禁用状态的链接样式按钮
+        &:disabled {
+          color: var(--text-color-tertiary);
+          background: transparent;
+          border-color: transparent;
+        }
+      }
+    }
+
+    // 折叠面板
+    .ant-collapse {
+      background: var(--component-bg);
+      border-color: var(--border-color);
+      color: var(--text-color);
+
+      .ant-collapse-item {
+        border-color: var(--border-color);
+
+        .ant-collapse-header {
+          background: var(--component-bg);
+          color: var(--text-color);
+
+          .ant-collapse-arrow {
+            color: var(--text-color-secondary);
+          }
+        }
+
+        .ant-collapse-content {
+          background: var(--component-bg);
+          border-color: var(--border-color);
+          color: var(--text-color);
+        }
+      }
+    }
+
+    // 表单项标签
+    .ant-form-item {
+      .ant-form-item-label > label {
+        color: var(--text-color);
+      }
+    }
+
+    // FormRender 对象折叠面板标题
+    .fr-obj-collapse {
+      .collapse-title {
+        color: var(--text-color);
+        background: var(--component-bg);
+      }
+    }
+
+    // FormRender 描述文本
+    .fr-desc {
+      color: var(--text-color-secondary);
+    }
+  }
+
+  // Ant Design 空状态描述文本
+  .ant-empty {
+    .ant-empty-description {
+      color: var(--text-color-secondary);
+    }
+
+    &.ant-empty-normal {
+      .ant-empty-description {
+        color: var(--text-color-secondary);
+      }
+    }
+  }
+
+  .ant-btn-variant-outlined:not(:disabled):not(.ant-btn-disabled):hover,
+  .ant-btn-variant-dashed:not(:disabled):not(.ant-btn-disabled):hover {
+    background: var(--component-bg);
+    .anticon {
+      color: var(--ant-primary-color);
+    }
+  }
+
+  // Scaffold 页面深色模式适配
+  .scaffold {
+    .content {
+      .category {
+        border-right: 2px solid #177ddc;
+
+        .category-item {
+          border: 1px solid var(--border-color);
+          background: var(--component-bg);
+
+          .title {
+            color: var(--text-color);
+          }
+        }
+
+        .checked-item,
+        .category-item:hover {
+          border: 1px solid #177ddc;
+          background: var(--hover-bg);
+        }
+      }
+
+      .scaffold {
+        .scaffold-item {
+          border: 1px solid var(--border-color);
+          background: var(--component-bg);
+
+          .title {
+            color: var(--text-color);
+          }
+
+          .description {
+            color: var(--text-color-secondary);
+          }
+        }
+
+        .scaffold-item:hover {
+          border: 1px solid #177ddc;
+          background: var(--hover-bg);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+// 布局样式文件
+
+// 右侧内容区域样式
+.umiPluginLayoutRight {
+  display: flex !important;
+  float: right;
+  height: 100%;
+  margin-left: auto;
+  overflow: hidden;
+  
+  .umiPluginLayoutAction {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    
+    &:hover {
+      background: rgba(0, 0, 0, 0.025);
+    }
+    
+    &.opened {
+      background: rgba(0, 0, 0, 0.025);
+    }
+  }
+  
+  .umiPluginLayoutSearch {
+    padding: 0 12px;
+    
+    &:hover {
+      background: transparent;
+    }
+  }
+  
+  .umiPluginLayoutName {
+    margin-left: 8px;
+    
+    &.umiPluginLayoutHideAvatarImg {
+      margin-left: 0;
+    }
+  }
+}
+
+// 深色模式适配
+html.dark {
+  .umiPluginLayoutRight {
+    .umiPluginLayoutAction {
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+      
+      &.opened {
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+  }
+}

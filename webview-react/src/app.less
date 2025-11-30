@@ -1,13 +1,36 @@
-body {
-  padding: 0;
-  #root {
-    height: 100%;
-  }
-  background: #f0f2f5 !important;
+// 全局样式文件
+// 定义浅色模式样式
+
+// 浅色模式下的全局样式
+:root {
+  // 背景色
+  --bg-color: #ffffff;
+  --component-bg: #ffffff;
+  --popover-bg: #ffffff;
+  
+  // 文字颜色
+  --text-color: rgba(0, 0, 0, 0.85);
+  --text-color-secondary: rgba(0, 0, 0, 0.65);
+  --text-color-tertiary: rgba(0, 0, 0, 0.45);
+  
+  // 边框颜色
+  --border-color: #d9d9d9;
+  
+  // 悬停背景色
+  --hover-bg: rgba(0, 0, 0, 0.025);
+  
+  // 链接颜色
+  --link-color: #1677ff;
 }
-html,
+
+// 应用浅色模式样式到body
 body {
-  width: 100%;
-  min-height: 100vh !important;
-  height: auto !important;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+// 应用深色模式样式到body
+body.dark {
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }

@@ -14,7 +14,8 @@ import { IScaffoldResponse, downloadScaffoldByVsCode, getPluginScaffoldJsonUrl, 
 import FormModal from '@/components/FormModal';
 import DownloadModal from '@/components/DownloadModal';
 import LocalProjectModal from '@/components/LocalProjectModal';
-import './index.less';
+import useTheme from '@/models/useTheme';
+import styles from './index.module.less';
 
 type IScaffold = IScaffoldResponse['scaffolds'][0];
 
@@ -111,15 +112,15 @@ const ScaffoldPage: React.FC = () => {
       spinning={loading.fetch || loading.download}
       tip={loading.download ? '正在下载模板...' : undefined}
     >
-      <div className="scaffold">
-        <Row className="header">
+      <div className={styles.scaffold}>
+        <Row className={styles.header}>
           <Col span={20}>
             选择模板创建应用{' '}
             <Tooltip title="分享物料可提交到 https://github.com/JimmyZDD/vg-materials 或配置本地json">
               <QuestionCircleOutlined />
             </Tooltip>
           </Col>
-          <Col span={4} className="control">
+          <Col span={4} className={styles.control}>
             <SyncOutlined
               spin={loading.fetch}
               onClick={() => {
@@ -128,25 +129,24 @@ const ScaffoldPage: React.FC = () => {
             />
           </Col>
         </Row>
-        <Row className="content">
+        <Row className={styles.content}>
           <Col>
-            <div className="category">
+            <div className={styles.category}>
               {categories.map((item) => (
                 <div
-                  className={`category-item ${currentCategory === item.name ? 'checked-item' : ''
-                    }`}
+                  className={`${styles.categoryItem} ${currentCategory === item.name ? styles.checkedItem : ''}`}
                   key={item.name}
                   onClick={() => {
                     changeCategory(item.name);
                   }}
                 >
-                  <div className="icon">
+                  <div className={styles.icon}>
                     <img src={item.icon} />
                   </div>
-                  <div className="title">{item.name}</div>
+                  <div className={styles.title}>{item.name}</div>
                   {currentCategory === item.name && (
-                    <div className="badge">
-                      <span className="tick">✓</span>
+                    <div className={styles.badge}>
+                      <span className={styles.tick}>✓</span>
                     </div>
                   )}
                 </div>
@@ -171,16 +171,16 @@ const ScaffoldPage: React.FC = () => {
             </Button>
           </Col>
           <Col>
-            <div className="scaffold">
+            <div className={styles.scaffoldList}>
               {scaffolds.length}
               {scaffolds.map((s) => (
                 <div
-                  className="scaffold-item"
+                  className={styles.scaffoldItem}
                   onClick={() => {
                     downloadScaffold(s);
                   }}
                 >
-                  <div className="screenshot">
+                  <div className={styles.screenshot}>
                     <img
                       src={
                         s.screenshot?.includes('gitee.')
@@ -189,9 +189,9 @@ const ScaffoldPage: React.FC = () => {
                       }
                     />
                   </div>
-                  <div className="title">{s.title}</div>
-                  <div className="description">{s.description}</div>
-                  {s.tag && <div className="description">tag: {s.tag}</div>}
+                  <div className={styles.title}>{s.title}</div>
+                  <div className={styles.description}>{s.description}</div>
+                  {s.tag && <div className={styles.description}>tag: {s.tag}</div>}
                 </div>
               ))}
             </div>

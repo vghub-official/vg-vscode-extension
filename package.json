@@ -196,6 +196,7 @@
     "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
     "lint": "eslint src --ext ts",
     "format": "prettier --loglevel warn --write \"src/**/*.{jsx,js,ts}\"",
+    "format:check": "prettier --check \"src/**/*.{jsx,js,ts}\"",
     "test": "node ./out/test/runTest.js"
   },
   "dependencies": {

@@ -1,8 +1,8 @@
 /*
  * @Author: zdd
  * @Date: 2023-06-17 09:58:32
- * @LastEditors: zdd
- * @LastEditTime: 2023-07-19 19:59:27
+ * @LastEditors: Zdd 445305451@qq.com
+ * @LastEditTime: 2025-11-30 00:16:26
  * @FilePath: /vg-vscode-extension/webview-react/.umirc.ts
  * @Description: 
  */
@@ -23,56 +23,60 @@ export default defineConfig({
   initialState: {},
   styleLoader: {},
   request: {},
-  layout: {
-    title: 'Vg Code',
-  },
+  layout: false, // 禁用默认布局
   routes: [
     {
       path: '/',
-      redirect: '/schema2code',
-    },
-    {
-      hideInMenu: true,
-      name: 'snippets',
-      path: '/snippets',
-      component: './snippets',
-    },
-    {
-      hideInMenu: true,
-      name: '代码片段详情',
-      path: '/material-detail/:name',
-      component: './materials/detail',
-    },
-    {
-      hideInMenu: true,
-      name: '创建代码片段',
-      path: '/material-create',
-      component: './materials/create',
-    },
-    {
-      name: 'schema2code',
-      path: '/schema2code',
-      component: './schema2code',
-    },
-    {
-      name: '物料中心',
-      path: '/materials',
-      component: './materials',
-    },
-    {
-      name: '脚手架',
-      path: '/scaffold',
-      component: './scaffold',
-    },
-    {
-      name: '讯飞大模型',
-      path: '/aigc_code',
-      component: './aigc_code',
-    },
-    {
-      name: '项目配置',
-      path: '/config',
-      component: './config',
+      // component: '@/layouts/index', // 使用自定义布局
+      routes: [
+        {
+          path: '/',
+          redirect: '/schema2code',
+        },
+        {
+          hideInMenu: true,
+          name: 'snippets',
+          path: '/snippets',
+          component: './snippets',
+        },
+        {
+          hideInMenu: true,
+          name: '代码片段详情',
+          path: '/material-detail/:name',
+          component: './materials/detail',
+        },
+        {
+          hideInMenu: true,
+          name: '创建代码片段',
+          path: '/material-create',
+          component: './materials/create',
+        },
+        {
+          name: 'schema2code',
+          path: '/schema2code',
+          component: './schema2code',
+        },
+        {
+          name: '物料中心',
+          path: '/materials',
+          component: './materials',
+        },
+        {
+          name: '脚手架',
+          path: '/scaffold',
+          component: './scaffold',
+        },
+        {
+          name: '讯飞大模型',
+          path: '/aigc_code',
+          component: './aigc_code',
+        },
+        {
+          name: '项目配置',
+          path: '/config',
+          component: './config',
+        }
+      ]
     }
   ],
   npmClient: 'pnpm',
@@ -135,4 +139,3 @@ export default defineConfig({
     exportLocalsConvention: 'camelCase'
   }
 });
-

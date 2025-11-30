@@ -1,0 +1,24 @@
+.themeSwitch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  height: 100%;
+  
+  &:hover {
+    background: rgba(0, 0, 0, 0.025);
+  }
+  
+  .themeSwitchControl {
+    margin: 0;
+  }
+}
+
+// 深色模式下的样式
+.dark {
+  .themeSwitch {
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+}

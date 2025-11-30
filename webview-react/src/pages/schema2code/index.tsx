@@ -1,8 +1,8 @@
 /*
  * @Author: zdd
  * @Date: 2023-06-27 22:07:27
- * @LastEditors: zdd dongdong@grizzlychina.com
- * @LastEditTime: 2024-01-24 16:14:43
+ * @LastEditors: Zdd 445305451@qq.com
+ * @LastEditTime: 2025-11-30 10:23:03
  * @FilePath: index.tsx
  * @Description:
  */
@@ -22,25 +22,10 @@ export type TableListItem = {
   name: string;
   createdAt: number;
   progress: number;
+  methodName: string;
+  summary: string;
 };
 
-const columns: ProColumns<TableListItem>[] = [
-  {
-    title: '序号',
-    dataIndex: 'index',
-    valueType: 'index',
-    width: 80,
-  },
-  {
-    title: 'methodName',
-    key: 'methodName',
-    dataIndex: 'methodName',
-  },
-  {
-    title: 'summary',
-    dataIndex: 'summary',
-  },
-];
 const Schema2codePage: React.FC = () => {
   const [selectedKey, setSelectedKey] = useState('');
   const [menuItems, setMenuItems] = useImmer<any[]>([]);
@@ -50,6 +35,25 @@ const Schema2codePage: React.FC = () => {
   const [schemas, setSchemas] = useImmer<Record<string, any>>({});
   const [openKeys, setOpenKeys] = useImmer<string[]>([]);
   const [modelList, setModelList] = useImmer<any[]>([]);
+
+  // 定义基础列
+  const baseColumns: ProColumns<TableListItem>[] = [
+    {
+      title: '序号',
+      dataIndex: 'index',
+      valueType: 'index',
+      width: 80,
+    },
+    {
+      title: 'methodName',
+      key: 'methodName',
+      dataIndex: 'methodName',
+    },
+    {
+      title: 'summary',
+      dataIndex: 'summary',
+    },
+  ];
 
   useMount(async () => {
     const _schemas = await getLocalSchemas();
@@ -115,13 +119,13 @@ const Schema2codePage: React.FC = () => {
       <ProTable<TableListItem>
         search={false}
         columns={[
-          ...columns,
+          ...baseColumns,
           {
             title: '操作',
             valueType: 'option',
             key: 'option',
             width: 120,
-            render: (_: string, record: any) => {
+            render: (_, record) => {
               if (
                 record.methodName.startsWith('update') ||
                 record.methodName.startsWith('delete')
