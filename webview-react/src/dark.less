@@ -464,6 +464,30 @@
     background: var(--component-bg);
     color: var(--text-color);
     border-color: var(--border-color);
+
+    // 输入框 placeholder 颜色适配
+    &::placeholder {
+      color: var(--text-color-tertiary);
+      opacity: 1; /* Firefox */
+    }
+
+    // 确保不同浏览器的兼容性
+    &::-webkit-input-placeholder {
+      color: var(--text-color-tertiary);
+    }
+
+    &::-moz-placeholder {
+      color: var(--text-color-tertiary);
+      opacity: 1;
+    }
+
+    &:-ms-input-placeholder {
+      color: var(--text-color-tertiary);
+    }
+
+    &::-ms-input-placeholder {
+      color: var(--text-color-tertiary);
+    }
   }
 
   .ant-select {
@@ -473,6 +497,114 @@
       background: var(--component-bg);
       color: var(--text-color);
       border-color: var(--border-color);
+
+      // 单选框输入框
+      .ant-select-selection-item {
+        color: var(--text-color);
+      }
+
+      // 多选框输入框
+      .ant-select-selection-placeholder {
+        color: var(--text-color-tertiary);
+      }
+    }
+
+    // 下拉箭头
+    .ant-select-arrow {
+      color: var(--text-color-secondary);
+    }
+
+    // 清除按钮
+    .ant-select-clear {
+      background: var(--component-bg);
+      color: var(--text-color-secondary);
+
+      &:hover {
+        color: var(--text-color);
+      }
+    }
+
+    // 选择器打开状态样式
+    &.ant-select-open {
+      .ant-select-selector {
+        border-color: var(--ant-primary-color);
+        box-shadow: 0 0 0 2px rgba(23, 125, 220, 0.2);
+      }
+
+      // 打开状态下箭头颜色
+      .ant-select-arrow {
+        color: var(--ant-primary-color);
+      }
+    }
+
+    // 下拉菜单
+    .ant-select-dropdown {
+      background: var(--popover-bg);
+      border-color: var(--border-color);
+      box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.32);
+
+      // 下拉菜单选项
+      .ant-select-item {
+        color: var(--text-color);
+
+        &:hover {
+          background: var(--hover-bg);
+        }
+
+        // 选中的选项
+        &.ant-select-item-option-active {
+          background: var(--hover-bg);
+        }
+
+        &.ant-select-item-option-selected {
+          background: rgba(23, 125, 220, 0.1);
+          color: var(--ant-primary-color);
+        }
+
+        // 禁用的选项
+        &.ant-select-item-option-disabled {
+          color: var(--text-color-tertiary);
+        }
+      }
+
+      // 下拉菜单分组标题
+      .ant-select-item-group {
+        color: var(--text-color-secondary);
+      }
+
+      // 下拉菜单分割线
+      .ant-select-item-option-grouped {
+        &:not(:last-child) {
+          border-bottom: 1px solid var(--border-color);
+        }
+      }
+
+      // 搜索框在下拉菜单中的样式
+      .ant-select-search {
+        .ant-select-selection-search-input {
+          background: var(--popover-bg);
+          color: var(--text-color);
+          border-color: var(--border-color);
+
+          &::placeholder {
+            color: var(--text-color-tertiary);
+          }
+        }
+      }
+    }
+
+    // 多选框标签
+    .ant-select-selection-item {
+      color: var(--text-color);
+
+      // 多选框标签关闭按钮
+      .ant-select-selection-item-remove {
+        color: var(--text-color-secondary);
+
+        &:hover {
+          color: var(--text-color);
+        }
+      }
     }
   }
 
@@ -526,6 +658,11 @@
         .ant-table-placeholder:hover > td,
         .ant-table-placeholder {
           background: var(--component-bg);
+        }
+
+        &.ant-table-placeholder {
+          background: var(--component-bg);
+          color: var(--text-color-secondary);
         }
       }
     }
@@ -980,25 +1117,6 @@
       }
     }
 
-    // 下拉菜单
-    .ant-select-dropdown {
-      background: var(--popover-bg);
-      border-color: var(--border-color);
-
-      .ant-select-item {
-        color: var(--text-color);
-
-        &.ant-select-item-option-active {
-          background: var(--hover-bg);
-        }
-
-        &.ant-select-item-option-selected {
-          background: rgba(23, 125, 220, 0.1);
-          color: var(--ant-primary-color);
-        }
-      }
-    }
-
     // 复选框和单选框
     .ant-checkbox-wrapper,
     .ant-radio-wrapper {
@@ -1067,33 +1185,6 @@
         }
       }
     }
-
-    // 折叠面板
-    .ant-collapse {
-      background: var(--component-bg);
-      border-color: var(--border-color);
-      color: var(--text-color);
-
-      .ant-collapse-item {
-        border-color: var(--border-color);
-
-        .ant-collapse-header {
-          background: var(--component-bg);
-          color: var(--text-color);
-
-          .ant-collapse-arrow {
-            color: var(--text-color-secondary);
-          }
-        }
-
-        .ant-collapse-content {
-          background: var(--component-bg);
-          border-color: var(--border-color);
-          color: var(--text-color);
-        }
-      }
-    }
-
     // 表单项标签
     .ant-form-item {
       .ant-form-item-label > label {
@@ -1112,6 +1203,155 @@
     // FormRender 描述文本
     .fr-desc {
       color: var(--text-color-secondary);
+    }
+  }
+
+  // 下拉菜单
+  .ant-select-dropdown {
+    background: var(--popover-bg);
+    border-color: var(--border-color);
+
+    .ant-select-item {
+      color: var(--text-color);
+
+      &.ant-select-item-option-active {
+        background: var(--hover-bg);
+      }
+
+      &.ant-select-item-option-selected {
+        background: rgba(23, 125, 220, 0.1);
+        color: var(--ant-primary-color);
+      }
+    }
+  }
+
+  // 折叠面板
+  .ant-collapse {
+    background: var(--component-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+
+    .ant-collapse-item {
+      border-color: var(--border-color);
+
+      .ant-collapse-header {
+        background: var(--component-bg);
+        color: var(--text-color);
+
+        .ant-collapse-arrow {
+          color: var(--text-color-secondary);
+        }
+      }
+
+      .ant-collapse-content {
+        background: var(--component-bg);
+        border-color: var(--border-color);
+        color: var(--text-color);
+      }
+    }
+  }
+
+  // 复选框和单选框
+  .ant-checkbox-wrapper,
+  .ant-radio-wrapper {
+    color: var(--text-color);
+  }
+
+  // 专门针对 ant-tree 的深色模式适配
+  .ant-tree {
+    background: var(--component-bg);
+    color: var(--text-color);
+    border-color: var(--border-color);
+
+    // 树节点
+    .ant-tree-treenode {
+      color: var(--text-color);
+
+      // 树节点标题
+      .ant-tree-node-content-wrapper {
+        color: var(--text-color);
+        background: transparent;
+
+        &:hover {
+          background: var(--hover-bg);
+        }
+
+        &.ant-tree-node-selected {
+          background: rgba(23, 125, 220, 0.1);
+        }
+      }
+
+      // 展开/收缩图标
+      .ant-tree-switcher {
+        color: var(--text-color-secondary);
+      }
+
+      // 复选框
+      .ant-tree-checkbox {
+        .ant-tree-checkbox-inner {
+          background: var(--component-bg);
+          border-color: var(--border-color);
+        }
+
+        &.ant-tree-checkbox-checked {
+          .ant-tree-checkbox-inner {
+            background: var(--ant-primary-color);
+            border-color: var(--ant-primary-color);
+          }
+
+          .ant-tree-checkbox-inner::after {
+            border-color: #fff;
+          }
+        }
+      }
+
+      // 子节点容器
+      .ant-tree-child-tree {
+        // 确保子树也适配深色模式
+        .ant-tree-treenode {
+          .ant-tree-node-content-wrapper {
+            color: var(--text-color);
+
+            &:hover {
+              background: var(--hover-bg);
+            }
+
+            &.ant-tree-node-selected {
+              background: rgba(23, 125, 220, 0.1);
+            }
+          }
+        }
+      }
+    }
+
+    // 虚线连接线
+    .ant-tree-show-line {
+      .ant-tree-indent-unit::before {
+        border-right: 1px solid var(--border-color);
+      }
+
+      .ant-tree-switcher {
+        background: var(--component-bg);
+      }
+    }
+
+    // 拖拽相关样式
+    .ant-tree-treenode.drag-over {
+      > .ant-tree-node-content-wrapper {
+        background: rgba(23, 125, 220, 0.1);
+      }
+    }
+
+    .ant-tree-treenode.drag-over-gap-top {
+      > .ant-tree-node-content-wrapper {
+        border-top: 2px dashed var(--ant-primary-color);
+      }
+    }
+
+    .ant-tree-treenode.drag-over-gap-bottom {
+      > .ant-tree-node-content-wrapper {
+        border-bottom: 2px dashed var(--ant-primary-color);
+      }
     }
   }
 
@@ -1178,5 +1418,91 @@
         }
       }
     }
+  }
+
+  // 专门针对 ant-modal 的深色模式适配
+  .ant-modal {
+    // 模态框内容区域
+    .ant-modal-content {
+      background: var(--popover-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.32);
+    }
+
+    // 模态框头部
+    .ant-modal-header {
+      background: var(--popover-bg);
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-color);
+
+      .ant-modal-title {
+        color: var(--text-color);
+      }
+    }
+
+    // 模态框关闭按钮
+    .ant-modal-close {
+      color: var(--text-color-secondary);
+
+      &:hover {
+        color: var(--text-color);
+      }
+    }
+
+    // 模态框主体
+    .ant-modal-body {
+      background: var(--popover-bg);
+      color: var(--text-color);
+    }
+
+    // 模态框底部
+    .ant-modal-footer {
+      background: var(--popover-bg);
+      border-top: 1px solid var(--border-color);
+
+      .ant-btn {
+        background: var(--component-bg);
+        border-color: var(--border-color);
+        color: var(--text-color);
+
+        &:hover {
+          background: var(--hover-bg);
+          border-color: var(--link-color);
+          color: var(--link-color);
+        }
+
+        &.ant-btn-primary {
+          background: var(--link-color);
+          border-color: var(--link-color);
+          color: #fff;
+
+          &:hover {
+            background: var(--ant-primary-color-hover);
+            border-color: var(--ant-primary-color-hover);
+          }
+        }
+      }
+    }
+
+    // 模态框确认框样式
+    &.ant-modal-confirm {
+      .ant-modal-body {
+        .ant-modal-confirm-body {
+          .ant-modal-confirm-title {
+            color: var(--text-color);
+          }
+
+          .ant-modal-confirm-content {
+            color: var(--text-color-secondary);
+          }
+        }
+      }
+    }
+  }
+
+  // 模态框遮罩层
+  .ant-modal-mask {
+    background: rgba(0, 0, 0, 0.45);
   }
 }

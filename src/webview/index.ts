@@ -22,9 +22,9 @@ let webviewPanels: {
 const getHtmlForWebview = (webview: vscode.Webview) => {
   const mainScriptPathOnDisk = vscode.Uri.file(path.join(getExtensionPath(), 'webview-dist', 'umi.js'));
   const vendorsScriptPathOnDisk = vscode.Uri.file(path.join(getExtensionPath(), 'webview-dist', 'vendors.js'));
-  // const mianScriptUri = 'http://localhost:8000/umi.js';
+  // const mainScriptUri = 'http://localhost:8000/umi.js';
   // const vendorsScriptUri = 'http://localhost:8000/vendors.js';
-  const mianScriptUri = webview.asWebviewUri(mainScriptPathOnDisk);
+  const mainScriptUri = webview.asWebviewUri(mainScriptPathOnDisk);
   const vendorsScriptUri = webview.asWebviewUri(vendorsScriptPathOnDisk);
 
   return `
@@ -42,7 +42,7 @@ const getHtmlForWebview = (webview: vscode.Webview) => {
 			</head>
 			<body>
         <div id="root"></div>
-        <script src="${mianScriptUri}"></script>
+        <script src="${mainScriptUri}"></script>
 			</body>
 		</html>
 `;
