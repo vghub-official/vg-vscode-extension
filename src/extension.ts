@@ -17,6 +17,7 @@ import { routersGenerate } from './commands/routers-generate';
 import { genRestapi } from './swagger-generator';
 import { commonCommands } from './commands/common';
 import { registerCompletion } from './commands/registerCompletion';
+import { registerTailwindHoverProvider } from './commands/tailwindHoverProvider';
 import { genVgcodeConfig } from './utils';
 import npmProvider from './package-link/npm';
 import pubProvider from './package-link/pub';
@@ -54,6 +55,7 @@ export function activate(context: vscode.ExtensionContext) {
   statusBarItem.show();
 
   registerCompletion(context);
+  registerTailwindHoverProvider(context);
   commonCommands(context);
 }
 
